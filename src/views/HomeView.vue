@@ -131,7 +131,7 @@ export default {
   margin: 50px;
 }
 .card{
-  width: 18rem;
+  max-width: 18rem;
 }
 .fit{
   width: fit-content;
