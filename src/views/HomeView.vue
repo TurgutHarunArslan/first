@@ -96,34 +96,34 @@ export default {
   <div class="home">
     <h1>Home</h1>
     <!-- <button @click="Getvids()">Get first</button> -->
-    <button @click="LoadMore($event)" v-if="links.length < count & loaded != false">Load More</button>
-
+    
     <!-- <div class="Vcard" v-for="item in links">
-    <RouterLink :to=whereTo(item.to)>
-    <embed v-bind:src=SrcIs(item.link) style="width:500px; height: 490px;">
-    </RouterLink>
-    <div class="container">
-    <h4><b>{{ item.title }}</b></h4>
-   </div>
-   </div> -->
+      <RouterLink :to=whereTo(item.to)>
+        <embed v-bind:src=SrcIs(item.link) style="width:500px; height: 490px;">
+        </RouterLink>
+        <div class="container">
+          <h4><b>{{ item.title }}</b></h4>
+        </div>
+      </div> -->
+      
+      
 
-
-
-   <p v-if="links.lengt < 0 ">Loading Video's</p>
-   <div class="row g-3">
-
-            <div class="col-12 col-md-6 col-lg-4" v-for="item in links">
-              <RouterLink :to=whereTo(item.to) style="text-decoration: none; color: black;">
-                <div class="card">
-                    <img v-bind:src=SrcIs(item.link) class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ item.title }}</h5>
-                    </div>
-                </div>
-              </RouterLink>
+      <p v-if="links.lengt < 0 ">Loading Video's</p>
+      <div class="row g-3">
+        
+        <div class="col-12 col-md-6 col-lg-4 fit" v-for="item in links" style="width: fit-content;">
+          <RouterLink :to=whereTo(item.to) style="text-decoration: none; color: black;">
+            <div class="card">
+              <img v-bind:src=SrcIs(item.link) class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.title }}</h5>
+              </div>
             </div>
-   </div>
-  </div>
+          </RouterLink>
+        </div>
+      </div>
+      <button @click="LoadMore($event)" v-if="links.length < count & loaded != false">Load More</button>
+    </div>
 </template>
 
 
@@ -131,5 +131,11 @@ export default {
 .home{
   display: flexbox;
   margin: 50px;
+}
+.card{
+  width: 18rem;
+}
+.fit{
+  width: fit-content;
 }
 </style>
