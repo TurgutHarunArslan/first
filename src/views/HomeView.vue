@@ -7,7 +7,6 @@
 import { initializeApp } from "firebase/app";
 // eslint-disable-next-line
 import {getDatabase,get,ref, query, startAfter,child,limitToFirst,orderByChild,startAt, set} from 'firebase/database'
-import {getCountFromServer,collection,getFirestore} from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,7 +24,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app)
-const dbfr = getFirestore(app)
 let lastVisible = 0
 // Get the last visible document
 // const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length-1];
