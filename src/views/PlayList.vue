@@ -25,11 +25,12 @@ export default {
     fetchData() {
       Get(this.$route.params.id).then((response) => {
         response = response.filter(n => n)
+        this.list.splice(0,this.list.length)
         response.forEach((element =>{
             this.list.push(element)
-            console.log(this.list)
         }))
         this.Zed = response[0]['link']
+        alert(this.Zed)
     })
         },
     selectTheVid(event,link){
