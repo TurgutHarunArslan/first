@@ -47,9 +47,7 @@ export default {
 
 <template>
     <div class="Video" v-if="Zed != undefined || null">
-      <video controls>
-        <source  :src=Zed width="100%" height="100%" >
-      </video>
+      <iframe controls :src=Zed width="100%" height="100%"></iframe>
     </div>
     <p v-else style="font-size: 50px; text-align: center;">Loading..</p>
 
@@ -79,7 +77,7 @@ export default {
   overflow-x: hidden;
   padding-top: 40%;
 }
-video{
+iframe{
   position: absolute;
   top: 0;
   left: 0;
@@ -93,7 +91,7 @@ background-color: grey;
 border-radius: 25px;
 }
 @media screen and (max-width: 475px) {
-  video{
+  iframe{
     width: 100%;
   }
   .Video{
