@@ -47,7 +47,10 @@ export default {
 
 <template>
     <div class="Video" v-if="Zed != undefined || null">
-      <iframe  :src=Zed width="100%" height="100%" allowFullScreen="allowFullScreen" frameborder="0"> </iframe>
+      <video controls>
+        <source  :src=Zed width="100%" height="100%" >
+
+      </video>
     </div>
     <p v-else style="font-size: 50px; text-align: center;">Loading..</p>
 
