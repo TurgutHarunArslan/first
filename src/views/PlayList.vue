@@ -30,7 +30,6 @@ export default {
             this.list.push(element)
         }))
         this.Zed = response[0]['link']
-        alert(this.Zed)
     })
         },
     selectTheVid(event,link){
