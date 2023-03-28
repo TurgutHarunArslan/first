@@ -1,9 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/vids/1">First Video</router-link> |
-    <router-link to="/vids/2">Second Video</router-link>
+    <router-link to="/">Videos</router-link> |
+    <router-link to="/Plists">Playlists</router-link> |
+    <router-link to="/about">About</router-link>
   </nav>
   <router-view/>
 </template>

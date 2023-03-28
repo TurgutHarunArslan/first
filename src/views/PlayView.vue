@@ -46,15 +46,15 @@ export default {
     }
   },
   async created() {
-    this.Getvids()
-    fetch("https://videowithrouter-default-rtdb.firebaseio.com/vids/.json?print=pretty&shallow=true").then((response) => response.json()).then((response)=>{
+    this.GetLists()
+    fetch("https://videowithrouter-default-rtdb.firebaseio.com//lists/" + ".json?" +" print=pretty&shallow=true").then((response) => response.json()).then((response)=>{
       this.count = Object.keys(response).length
     })
   },
-  name: 'HomeView',
+  name: 'PlayLists',
   methods: {
-   Getvids(){
-    const first = query(ref(db, "vids"),limitToFirst(2),orderByChild('ts','desc'));
+   GetLists(){
+    const first = query(ref(db, "lists"),limitToFirst(2));
     get(first).then((snapshot =>{
       snapshot.val().forEach(element => {
         this.links.push(element)
@@ -67,7 +67,7 @@ export default {
   LoadMore(event){
     event.target.disabled = true
     if(lastVisible < this.count){
-    const next = query(ref(db, "vids"),orderByChild('ts','desc'),startAfter(lastVisible),limitToFirst(2));
+    const next = query(ref(db, "lists"),startAfter(lastVisible),limitToFirst(2));
     get(next).then((snapshot =>{
       var val = Object.values(snapshot.val())
       val.forEach(element => {
@@ -79,12 +79,9 @@ export default {
       });
       lastVisible += Object.keys(snapshot.val()).length
     }))}else{console.log('no vidoe left')}
-  },SrcIs(link){
-    console.log(link)
-    var youtube_video_id = /[^/]*$/.exec(link)[0]
-    return '//img.youtube.com/vi/'+youtube_video_id+'/0.jpg'
-  },whereTo(to){
-    return '/vids/' + to
+  }
+  ,whereTo(to){
+    return '/Playlist/' + parseInt(to+1)
   }
   },
 }
@@ -92,7 +89,7 @@ export default {
 <template>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <div class="home">
-    <h1>Videos</h1>
+    <h1>PlayLists</h1>
     <!-- <button @click="Getvids()">Get first</button> -->
     
     <!-- <div class="Vcard" v-for="item in links">
@@ -106,13 +103,13 @@ export default {
       
       
 
-      <p v-if="links.lengt < 0 ">Loading Video's</p>
+      <p v-if="links.lengt < 0 ">Loading Playlists's</p>
       <div class="row g-3">
         
-        <div class="col-12 col-md-6 col-lg-4 fit" v-for="item in links" style="width: fit-content;">
-          <RouterLink :to=whereTo(item.to) style="text-decoration: none; color: black;">
+        <div class="col-12 col-md-6 col-lg-4 fit" v-for="item,index in links" style="width: fit-content;">
+          <RouterLink :to=whereTo(index) style="text-decoration: none; color: black;">
             <div class="card">
-              <img v-bind:src=SrcIs(item.link) class="card-img-top">
+              <img v-bind:src=item.thumbnail class="card-img-top">
               <div class="card-body">
                 <h5 class="card-title">{{ item.title }}</h5>
               </div>
