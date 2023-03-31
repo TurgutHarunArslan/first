@@ -6,7 +6,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // eslint-disable-next-line
-import {getDatabase,get,ref, query, startAfter,child,limitToFirst,orderByChild,startAt, set} from 'firebase/database'
+import {getDatabase,get,ref, query, startAfter,child,limitToFirst,orderByChild,startAt, set, orderByValue} from 'firebase/database'
 // TODO: Add SDKs for Firebase products that you want to use
 //https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -67,8 +67,9 @@ export default {
   LoadMore(event){
     event.target.disabled = true
     if(lastVisible < this.count){
-    const next = query(ref(db, "lists"),startAfter(lastVisible),limitToFirst(2));
+    const next = query(ref(db, "lists/"),orderByChild('ts','desc'),startAfter(2));
     get(next).then((snapshot =>{
+      console.log(snapshot.val())
       var val = Object.values(snapshot.val())
       val.forEach(element => {
         setTimeout(() => {
@@ -109,7 +110,7 @@ export default {
         <div class="col-12 col-md-6 col-lg-4 fit" v-for="item,index in links" style="width: fit-content;">
           <RouterLink :to=whereTo(index) style="text-decoration: none; color: black;">
             <div class="card">
-              <img v-bind:src=item.thumbnail class="card-img-top">
+              <img v-bind:src=item.thumbnail class="card-img-top" style="width: 286px;height: 215px;">
               <div class="card-body">
                 <h5 class="card-title">{{ item.title }}</h5>
               </div>

@@ -79,7 +79,7 @@ export default {
       });
       lastVisible += Object.keys(snapshot.val()).length
     }))}else{console.log('no vidoe left')}
-  },SrcIs(link){
+  },SrcIs(link,thumb){
     console.log(link)
     var youtube_video_id = /[^/]*$/.exec(link)[0]
     return '//img.youtube.com/vi/'+youtube_video_id+'/0.jpg'
@@ -112,7 +112,7 @@ export default {
         <div class="col-12 col-md-6 col-lg-4 fit" v-for="item in links" style="width: fit-content;">
           <RouterLink :to=whereTo(item.to) style="text-decoration: none; color: black;">
             <div class="card">
-              <img v-bind:src=SrcIs(item.link) class="card-img-top">
+              <img v-bind:src=item.thumbnail class="card-img-top" style="width: 286px;height: 215px;">
               <div class="card-body">
                 <h5 class="card-title">{{ item.title }}</h5>
               </div>

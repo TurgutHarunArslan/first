@@ -24,6 +24,7 @@ export default {
   methods: {
     fetchData() {
       Get(this.$route.params.id).then((response) => {
+        console.log(response)
         response = response.filter(n => n)
         this.list.splice(0,this.list.length)
         response.forEach((element =>{
